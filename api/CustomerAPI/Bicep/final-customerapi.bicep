@@ -107,6 +107,9 @@ resource operation 'Microsoft.ApiManagement/service/apis/operations@2021-08-01' 
 
 resource api_policy 'Microsoft.ApiManagement/service/apis/policies@2021-08-01' = {
   name: 'policy'
+  dependsOn: [
+    remove_apim_key
+  ]
   parent:api
   properties: {
     value: api_policy_xml
