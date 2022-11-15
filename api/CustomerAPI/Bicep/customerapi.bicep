@@ -136,8 +136,10 @@ resource remove_apim_key 'Microsoft.ApiManagement/service/policyFragments@2021-1
   }
 }
 var remove_apim_key_xml = '''
-<set-header name="Ocp-Apim-Subscription-Key" exists-action="override">
-	<value> </value>
+<fragment>
+  <set-header name="Ocp-Apim-Subscription-Key" exists-action="override">
+	  <value> </value>
+  </fragment>
 </set-header>
 '''
 
