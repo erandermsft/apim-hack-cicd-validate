@@ -15,7 +15,9 @@ on:
 jobs:
   build-and-deploy:
    runs-on: ubuntu-latest
-   environment: ${{inputs.environment}}
+   environment: 
+    name: ${{inputs.environment}}
+    url: https://apim-${{inputs.name}}.azure-api.net/ch5/api/customers
    env:
         directory: api/CustomerAPI
         name: ${{ inputs.name }}    # Your POSTFIX
