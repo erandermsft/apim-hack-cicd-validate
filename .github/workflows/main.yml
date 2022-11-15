@@ -41,8 +41,8 @@ jobs:
     - name: Deploy API to Azure Container Apps 
       uses: azure/arm-deploy@v1
       with:
-        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}   # Subscription Id
-        resourceGroupName: rg-${{ env.name }}               # Resource group
-        template: ${{ env.directory }}/Bicep/main.bicep     # File to deploy
-        parameters: dockerimagetag=${{ github.run_number }} name=${{ env.name }}  # Parameters
-        failOnStdErr: false 
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: rg-${{ env.name }}
+        template: ${{ env.directory }}/Bicep/main.bicep
+        parameters: dockerimagetag=${{ github.run_number }} name=${{ env.name }} apidefinitionurl=https://stg${{ env.name }}hack.blob.core.windows.net/apidefinitions/swagger.json?${{ secrets.AZURE_BLOB_SAS_TOKEN }}
+        failOnStdErr: false
