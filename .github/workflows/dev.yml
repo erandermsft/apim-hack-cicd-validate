@@ -12,5 +12,5 @@ jobs:
     uses: ./.github/workflows/main.yml         #Call the existing workflow 
     secrets: inherit
     with:
-      name: erande
+      name: erande2
       environment: ''   
