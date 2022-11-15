@@ -139,8 +139,9 @@ var remove_apim_key_xml = '''
 <fragment>
   <set-header name="Ocp-Apim-Subscription-Key" exists-action="override">
 	  <value> </value>
-  </fragment>
-</set-header>
+  </set-header>
+</fragment>
+
 '''
 
 var operation_policy_xml = '''<policies>
