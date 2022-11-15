@@ -12,12 +12,6 @@ on:
         type: string
         default: erande2                    
         description: 'Suffix to use'
-  push:
-      branches-ignore:
-        - 'main'
-      paths:
-        - 'api/CustomerAPI/**' 
-        - '.github/workflows/*'
 jobs:
   build-and-deploy:
    runs-on: ubuntu-latest
