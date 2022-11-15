@@ -22,6 +22,31 @@ namespace CustomerAPI.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
+        public async Task<Customer> GetCustomerByEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentNullException(nameof(email));
+
+            var customer = await (from cust in _context.Customers
+                                  join address in _context.Addresses on cust.CustomerId equals address.CustomerId
+                                  select new Customer
+                                  {
+                                      Address = new Address
+                                      {
+                                          ZipCode = address.ZipCode,
+                                          Country = address.Country,
+                                          AddressId = address.AddressId
+                                      },
+                                      PhoneNumber = cust.PhoneNumber,
+                                      CustomerId = cust.CustomerId,
+                                      Email = cust.Email,
+                                      PersonalNumber = cust.PersonalNumber
+                                  }).Where(customer => customer.Email == email).FirstOrDefaultAsync();
+
+            _logger.LogInformation("Customer fetched successfully by email");
+
+            return customer ?? throw new ArgumentNullException(nameof(customer));
+        }
         public async void CreateCustomer(Customer customer)
         {
             if (customer == null)
