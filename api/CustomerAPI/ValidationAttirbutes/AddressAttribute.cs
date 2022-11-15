@@ -25,10 +25,8 @@ namespace CustomerAPI.ValidationAttirbutes
             if ((zip.Length != 4 && zip.Length != 5) && double.IsNaN(Convert.ToDouble(zip)) && string.IsNullOrEmpty(zip))
                 return new ValidationResult("Zip code should be numerical with 4-5 digits", new[] { "CustomerCreateDto" });
 
-            var country = customerCreateDto.Address.Country.ToLower();
-
-            if (country != "sweden" && country != "denmark" && country != "norway" && country != "finland")
-                return new ValidationResult("Country should be among (Sweden, Denmark, Norway, Finland)", new[] { "CustomerCreateDto" });
+            if (country != "sweden" && country != "denmark" && country != "norway" && country != "finland" && country != "iceland")
+                return new ValidationResult("Country should be among (Sweden, Denmark, Norway, Finland, Iceland)", new[] { "CustomerCreateDto" });
 
             var phoneNumber = customerCreateDto.PhoneNumber;
 
@@ -40,6 +38,8 @@ namespace CustomerAPI.ValidationAttirbutes
                 return new ValidationResult("Since the country is Norway, Phone Number should start with +47", new[] { "CustomerCreateDto" });
             else if (country == "finland" && !phoneNumber.StartsWith("+358"))
                 return new ValidationResult("Since the country is Finland, Phone Number should start with +358", new[] { "CustomerCreateDto" });
+            else if (country == "iceland" && !phoneNumber.StartsWith("+354"))
+                return new ValidationResult("Since the country is Iceland, Phone Number should start with +354", new[] { "CustomerCreateDto" });
 
             return ValidationResult.Success;
 
